@@ -3,203 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Holi - From Alok</title>
+    <title>Player Images with Indian Flag Background</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Set the background image of the page to the Indian flag */
         body {
             margin: 0;
             padding: 0;
-            background-color: #fff;
-            overflow: hidden;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        h1 {
-            font-size: 6vw;
-            color: #ff5722;
-            text-transform: uppercase;
-            margin: 20px;
+            height: 100vh;
+            font-family: Arial, sans-serif;
             position: relative;
-            display: inline-block;
-            animation: explodeName 3s ease-in-out infinite;
+            animation: changeBackground 6s infinite; /* Animation to change background every 6s */
         }
 
-        .message {
-            font-size: 3vw;
-            color: #333;
-            font-weight: bold;
-            margin: 20px;
-            animation: fadeIn 2s ease-out forwards;
-        }
-
-        @keyframes explodeName {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-                color: #ff5722;
-            }
-            25% {
-                transform: scale(1.2);
-                opacity: 0.7;
-            }
-            50% {
-                transform: scale(1.5);
-                opacity: 0.5;
-                color: #fff;
-            }
-            75% {
-                transform: scale(1.2);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-                color: #ff5722;
-            }
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .explosion {
+        /* Add a low-light overlay to darken the background */
+        .background-overlay {
             position: absolute;
-            border-radius: 50%;
-            opacity: 0;
-            pointer-events: none;
-            animation: explode 1.5s ease-out forwards;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Darker overlay for stronger low-light effect */
+            z-index: -1; /* Behind the content */
         }
 
-        @keyframes explode {
+        /* Background images that will change */
+        @keyframes changeBackground {
             0% {
-                transform: scale(0) translate(0, 0);
-                opacity: 1;
+                background: url('https://static.vecteezy.com/system/resources/thumbnails/028/695/557/small_2x/indian-flag-abstract-background-wallpaper-for-independence-day-on-15-august-ai-generative-free-photo.jpg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            20% {
+                background: url('https://static.vecteezy.com/system/resources/thumbnails/025/239/226/small_2x/indian-flag-waving-symbol-of-freedom-and-patriotism-generated-by-ai-photo.jpg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            40% {
+                background: url('https://static.vecteezy.com/system/resources/thumbnails/035/978/555/small_2x/ai-generated-national-flag-of-india-with-a-cloud-of-colored-smoke-on-a-black-background-indian-flag-colors-tech-wallpaper-ai-generated-free-photo.jpg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            60% {
+                background: url('https://wallpapers.com/images/hd/india-map-diagonal-pattern-imd2lgmylz3rwdnu.jpg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            80% {
+                background: url('https://t3.ftcdn.net/jpg/06/19/33/84/360_F_619338481_3TUXj2juPmstEnrwbgfo5yTlvsSZmr2x.jpg') no-repeat center center fixed;
+                background-size: cover;
             }
             100% {
-                transform: scale(4) translate(var(--x), var(--y));
-                opacity: 0;
+                background: url('https://as2.ftcdn.net/v2/jpg/06/80/00/81/1000_F_680008125_ZzkC794WxGBjv3wAJgufNYA9xTa6qlIx.jpg') no-repeat center center fixed;
+                background-size: cover;
             }
         }
 
-        .btn {
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 4vw;
+        /* Style the player container to arrange images in a row */
+        .player-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        /* Each player image has a border and circular shape */
+        .player {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #7e3e3f; /* Border color */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            position: relative;
             cursor: pointer;
-            border-radius: 10px;
-            margin-top: 30px;
-            transition: background-color 0.3s;
-            width: 60%;
-            max-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .btn:hover {
-            background-color: #e64a19;
+        /* Ensure images cover the container properly */
+        .player img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease; /* Image hover effect */
         }
 
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 8vw; /* Adjust size on smaller screens */
-            }
-
-            .message {
-                font-size: 5vw;
-            }
-
-            .btn {
-                font-size: 5vw; /* Bigger button text on small screens */
-                width: 80%; /* Button width adjustment */
-            }
+        /* Styling for the short names below the player images */
+        .player-name {
+            margin-top: 10px;
+            font-size: 18px;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 160px;  /* Position the name directly below the image */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease; /* Quick fade-in effect */
         }
 
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 10vw; /* Even larger text for mobile */
-            }
+        /* Hover effect on player image */
+        .player:hover img {
+            transform: scale(1.1); /* Zoom in on hover */
+        }
 
-            .message {
-                font-size: 6vw; /* Larger message text */
-            }
+        /* Hover effect on player name */
+        .player:hover .player-name {
+            opacity: 1; /* Makes the name visible */
+        }
 
-            .btn {
-                font-size: 6vw; /* Large button for mobile */
-                width: 90%; /* Button width adjustment for very small screens */
-            }
+        /* Title styling */
+        h1 {
+            position: absolute;
+            top: 20px;
+            font-size: 36px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 
-<h1 id="name">Alok</h1>
-<p class="message">Happy Holi! <br> From Alok to all my dear friends!</p>
-<button class="btn" onclick="startExplosions()">Celebrate Holi!</button>
+<h1>Cricket-Legends</h1>
 
-<script>
-    const colors = [
-        '#FF5733', '#33FF57', '#3357FF', '#FF33F6', '#F8FF33', '#FF8133',
-        '#F44336', '#9C27B0', '#8BC34A', '#2196F3', '#FFEB3B', '#00BCD4'
-    ];
+<div class="background-overlay"></div>
 
-    // Function to start explosions when button is clicked
-    function startExplosions() {
-        // Start the explosion effect with a set interval
-        setInterval(createExplosion, 150);
-    }
-
-    // Function to create an explosion
-    function createExplosion() {
-        const explosion = document.createElement('div');
-        explosion.classList.add('explosion');
-
-        // Randomize explosion position around the name
-        const nameElement = document.getElementById('name');
-        const nameRect = nameElement.getBoundingClientRect();
-        const x = nameRect.left + Math.random() * nameRect.width;
-        const y = nameRect.top + Math.random() * nameRect.height;
-
-        // Set random color and size for the explosion
-        explosion.style.width = `${Math.random() * 100 + 50}px`;
-        explosion.style.height = `${explosion.style.width}`;
-        explosion.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-        // Position the explosion around the name
-        explosion.style.left = `${x}px`;
-        explosion.style.top = `${y}px`;
-
-        // Animation direction to move the explosion outward
-        explosion.style.setProperty('--x', `${Math.random() * 800 - 400}px`);
-        explosion.style.setProperty('--y', `${Math.random() * 800 - 400}px`);
-
-        document.body.appendChild(explosion);
-
-        // Remove explosion after animation
-        setTimeout(() => {
-            explosion.remove();
-        }, 1500);
-    }
-</script>
+<div class="player-container">
+    <div class="player">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTissRFH2ZnzaIOJus_XKhwRkDm8j-hsWPeIQ&s" alt="MSD">
+        <div class="player-name">MSD</div>
+    </div>
+    <div class="player">
+        <img src="https://c.ndtvimg.com/2025-03/ufsk9568_rohit-sharma-bcci_625x300_03_March_25.jpg?im=FeatureCrop,algorithm=dnn,width=806,height=605" alt="Hitman">
+        <div class="player-name">Hitman</div>
+    </div>
+    <div class="player">
+        <img src="https://i.pinimg.com/736x/55/65/32/5565328275c0c39c75a1e7d1897e3831.jpg" alt="Jaddu">
+        <div class="player-name">Jaddu</div>
+    </div>
+    <div class="player">
+        <img src="https://i.brecorder.com/primary/2023/03/121244321827d24.jpg" alt="Kohli">
+        <div class="player-name">Kohli</div>
+    </div>
+    <div class="player">
+        <img src="https://imgk.timesnownews.com/story/Hardik-solo-MI-BCCI-IPL.jpg" alt="Pandya">
+        <div class="player-name">Pandya</div>
+    </div>
+    <div class="player">
+        <img src="https://pbs.twimg.com/media/GRU807-WgAA9hQ3?format=jpg&name=large" alt="Bumrah">
+        <div class="player-name">Bumrah</div>
+    </div>
+</div>
 
 </body>
 </html>
+
 
 

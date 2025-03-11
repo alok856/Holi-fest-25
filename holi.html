@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Holi - From Alok</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 6vw;
+            color: #ff5722;
+            text-transform: uppercase;
+            margin: 20px;
+            position: relative;
+            display: inline-block;
+            animation: explodeName 3s ease-in-out infinite;
+        }
+
+        .message {
+            font-size: 3vw;
+            color: #333;
+            font-weight: bold;
+            margin: 20px;
+            animation: fadeIn 2s ease-out forwards;
+        }
+
+        @keyframes explodeName {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                color: #ff5722;
+            }
+            25% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+                color: #fff;
+            }
+            75% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+                color: #ff5722;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .explosion {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0) translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(4) translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+
+        .btn {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 4vw;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+            width: 60%;
+            max-width: 300px;
+        }
+
+        .btn:hover {
+            background-color: #e64a19;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 8vw; /* Adjust size on smaller screens */
+            }
+
+            .message {
+                font-size: 5vw;
+            }
+
+            .btn {
+                font-size: 5vw; /* Bigger button text on small screens */
+                width: 80%; /* Button width adjustment */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 10vw; /* Even larger text for mobile */
+            }
+
+            .message {
+                font-size: 6vw; /* Larger message text */
+            }
+
+            .btn {
+                font-size: 6vw; /* Large button for mobile */
+                width: 90%; /* Button width adjustment for very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1 id="name">Alok</h1>
+<p class="message">Happy Holi! <br> From Alok to all my dear friends!</p>
+<button class="btn" onclick="startExplosions()">Celebrate Holi!</button>
+
+<script>
+    const colors = [
+        '#FF5733', '#33FF57', '#3357FF', '#FF33F6', '#F8FF33', '#FF8133',
+        '#F44336', '#9C27B0', '#8BC34A', '#2196F3', '#FFEB3B', '#00BCD4'
+    ];
+
+    // Function to start explosions when button is clicked
+    function startExplosions() {
+        // Start the explosion effect with a set interval
+        setInterval(createExplosion, 150);
+    }
+
+    // Function to create an explosion
+    function createExplosion() {
+        const explosion = document.createElement('div');
+        explosion.classList.add('explosion');
+
+        // Randomize explosion position around the name
+        const nameElement = document.getElementById('name');
+        const nameRect = nameElement.getBoundingClientRect();
+        const x = nameRect.left + Math.random() * nameRect.width;
+        const y = nameRect.top + Math.random() * nameRect.height;
+
+        // Set random color and size for the explosion
+        explosion.style.width = `${Math.random() * 100 + 50}px`;
+        explosion.style.height = `${explosion.style.width}`;
+        explosion.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+        // Position the explosion around the name
+        explosion.style.left = `${x}px`;
+        explosion.style.top = `${y}px`;
+
+        // Animation direction to move the explosion outward
+        explosion.style.setProperty('--x', `${Math.random() * 800 - 400}px`);
+        explosion.style.setProperty('--y', `${Math.random() * 800 - 400}px`);
+
+        document.body.appendChild(explosion);
+
+        // Remove explosion after animation
+        setTimeout(() => {
+            explosion.remove();
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
+
+
